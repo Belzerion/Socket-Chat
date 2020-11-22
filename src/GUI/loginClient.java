@@ -71,13 +71,6 @@ public class loginClient extends Application {
                     newWindow.setScene(secondscene);newWindow.setX(stage.getX() + 200);
                     newWindow.setY(stage.getY() + 100);
                     newWindow.show();
-                    Runnable receive = () ->{
-                        Platform.runLater(() -> client.receive());
-                    };
-                    new Thread(receive).start();
-
-
-
             }
         });
         root.getChildren().add(fnameField);root.getChildren().add(lnameField);
