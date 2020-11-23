@@ -1,18 +1,3 @@
-Geoffroy BOUSSARD: Bonjour
-hugo DEGEORGES: Salutations jeune homme
-Hugo DUPONT: Hello les gens 
-julien Nicolas: Yop les gens !
-Julien NICOLAS: Yop
-Aksel VOLLE: Yop
-Aksel VOLLES: HEY 
-Paul MOREL: YOP
-hugo DEGEORGES: yo
-hugo DEGEORGES: Bonjour
-julien NICOLAS: Bonsoir
-hugo DEGEORGES: Yo
-hugo DEGEORGES: Comment ça va ? 
-h d: h
-h d: yo
-h d: yo
-h d: yo
-j p: yo
+
+Hugo DEGEORGES: Bonjour Comment ça va ? 
+Geoffroy BOUSSARD: Bonjour ! Très bien et toi ?

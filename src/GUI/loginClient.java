@@ -2,11 +2,10 @@ package GUI;
 
 import TCP.Client;
 import javafx.application.Application;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -15,11 +14,13 @@ import javafx.util.Pair;
 import javafx.application.Platform;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class loginClient extends Application {
     private Stage stage;
     private Client client;
-    private VBox messages;
+    private TextArea messages;
+    private LinkedList<Pair<Pair<String,String>,String>>listMsg = new LinkedList<Pair<Pair<String,String>,String>>();
 
     @Override
     public void start(Stage stage){
@@ -50,8 +51,9 @@ public class loginClient extends Application {
                     //launch(cC.getClass());
                     client.establishConnection(hN,portField.getText());
                     Pane chat = new AnchorPane();
-                    messages = new VBox();
-
+                    messages = new TextArea();
+                    messages.setEditable(false);
+                    messages.setPrefSize(500,400);
                     TextField writeMsg = new TextField("");writeMsg.setPromptText("Write a message");
                     writeMsg.setLayoutX(40);writeMsg.setLayoutY(350);
                     Button sendMsg = new Button("Send");sendMsg.setLayoutX(250);sendMsg.setLayoutY(350);
@@ -64,10 +66,11 @@ public class loginClient extends Application {
                     chat.getChildren().addAll(writeMsg,sendMsg);
                     sendMsg.setOnMouseClicked(ev ->{
                         client.send(writeMsg.getText());
+                        writeMsg.setText("");
                     });
                     Scene secondscene = new Scene(chat, 500, 400);
                     Stage newWindow = new Stage();
-                    newWindow.setTitle("Chat");
+                    newWindow.setTitle("Chat - "+client.getFname()+" "+client.getLname());
                     newWindow.setScene(secondscene);newWindow.setX(stage.getX() + 200);
                     newWindow.setY(stage.getY() + 100);
                     newWindow.show();
@@ -84,12 +87,10 @@ public class loginClient extends Application {
         stage.show();
 
     }
+
+
     public void addMessage(Pair<Pair<String,String>,String> message){
-        HBox Message = new HBox();
-        Text metaInfMessage = new Text(message.getKey().getKey()+" "+message.getKey().getValue()+": ");
-        Text messageContent = new Text(message.getValue());
-        Message.getChildren().addAll(metaInfMessage, messageContent);
-        messages.getChildren().add(Message);
+        messages.appendText(message.getKey().getKey()+" "+message.getKey().getValue()+" : "+message.getValue()+"\n");
     }
     public void displayAlert(String cause) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

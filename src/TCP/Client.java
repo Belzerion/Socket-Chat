@@ -73,20 +73,22 @@ public class Client extends Thread {
             }
     }
     public void receive(){
-            Pair<Pair<String,String>, String> msg;
-            try {
-                msg = (Pair<Pair<String,String>, String>) socIn.readObject();
-                while(msg!=null){
-                    System.out.println(msg.getKey().getKey()+" "+msg.getKey().getValue()+": "+msg.getValue());
+        Pair<Pair<String,String>, String> msg;
+        try {
+            msg = (Pair<Pair<String,String>, String>) socIn.readObject();
+            while(msg!=null){
+                msg = (Pair<Pair<String, String>, String>) socIn.readObject();
+                if(!msg.getKey().getKey().equals("") && !msg.getKey().getValue().equals("") && !msg.getValue().equals("") ) {
+                    System.out.println(msg.getKey().getKey() + " " + msg.getKey().getValue() + ": " + msg.getValue());
                     gui.addMessage(msg);
-                    msg = (Pair<Pair<String,String>, String>) socIn.readObject();
                 }
-                System.out.println("Server disconnected");
-                socOut.close();
-                clientSocket.close();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
             }
+            System.out.println("Server disconnected");
+            socOut.close();
+            clientSocket.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
