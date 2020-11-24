@@ -1,17 +1,10 @@
 package TCP;
 
-import GUI.loginClient;
-import com.sun.glass.ui.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import GUI.ClientGUI;
 import javafx.util.Pair;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
@@ -25,10 +18,10 @@ public class Client extends Thread {
     private ObjectOutputStream socOut;
     private Socket clientSocket;
     private Scanner sc = new Scanner(System.in);//pour lire à partir du clavier
-    private loginClient gui;
+    private ClientGUI gui;
 
 
-    public Client(String fname, String lname, String hostname, int port, loginClient gui){
+    public Client(String fname, String lname, String hostname, int port, ClientGUI gui){
         this.fname = fname;
         this.lname = lname;
         this.hostname = hostname;
@@ -43,7 +36,7 @@ public class Client extends Thread {
         return lname;
     }
 
-    public void establishConnection(String hostname, String port) {
+    public boolean establishConnection(String hostname, String port) {
         try {
             clientSocket = new Socket(hostname, Integer.parseInt(port));
             socOut = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -55,10 +48,13 @@ public class Client extends Thread {
                 }
             });
             receive.start();
+            return true;
         } catch (UnknownHostException e) {
             e.printStackTrace();
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
         public void send(String message){

@@ -1,13 +1,12 @@
 package TCP;
 
-import GUI.startServer;
+import GUI.ServerGUI;
 import javafx.util.Pair;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
-import javafx.application.Application;
 
 public class ServerTCP extends Thread{
         private static ServerSocket listenSocket;
@@ -15,10 +14,10 @@ public class ServerTCP extends Thread{
         private static Long clientIndice = 0L;
         private static LinkedList<Pair<Long, ObjectOutputStream>> listOOS = new LinkedList<Pair<Long, ObjectOutputStream>>();
         private static String historyFile = "history.txt";
-        private static startServer gui;
+        private static ServerGUI gui;
 
 
-        public ServerTCP(startServer sS){
+        public ServerTCP(ServerGUI sS){
             this.gui = sS;
         }
 

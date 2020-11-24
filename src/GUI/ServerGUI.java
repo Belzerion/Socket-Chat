@@ -6,12 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class startServer extends Application {
+public class ServerGUI extends Application {
     private Stage stage;
     private TextField portField;
     private int portUsed;
@@ -27,8 +27,10 @@ public class startServer extends Application {
     private void initUI(Stage stage){
         Pane root = new AnchorPane();
         Text port = new Text("Port:");port.setLayoutX(200);port.setLayoutY(125);
+        stage.getIcons().add(new Image("files/start-icon.png"));
+        BackgroundImage background = new BackgroundImage(new Image("files/background.jpg"), BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);
         portField = new TextField("2000");portField.setLayoutX(200);portField.setLayoutY(130);
-        Button start = new Button("Start Server");start.setLayoutX(200);start.setLayoutY(180);
+        Button start = new Button("Start Server");start.setLayoutX(230);start.setLayoutY(180);
         start.setOnAction(e ->{
             if(portField.getText() == null || portField.getText() == ""){
                 displayAlert("Please enter a valid port");
@@ -37,11 +39,13 @@ public class startServer extends Application {
                 sT.createSockClient();
             }
         });
+        root.setBackground(new Background(background));
         root.getChildren().add(portField);
         root.getChildren().add(start);
         root.getChildren().add(port);
         Scene scene = new Scene(root, 500, 400);
         stage.setTitle("Start server");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
