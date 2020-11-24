@@ -37,6 +37,7 @@ public class ServerGUI extends Application {
             }else{
                 sT.startServ(getPort());
                 sT.createSockClient();
+                displayInfo("Server connected");
             }
         });
         root.setBackground(new Background(background));
@@ -59,6 +60,14 @@ public class ServerGUI extends Application {
         alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(cause);
+        alert.showAndWait();
+    }
+
+    public void displayInfo(String info){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(info);
         alert.showAndWait();
     }
 

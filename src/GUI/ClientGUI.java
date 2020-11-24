@@ -60,7 +60,7 @@ public class ClientGUI extends Application {
                     messages = new TextArea();
                     messages.setEditable(false);
                     messages.setPrefSize(500, 400);
-                    messages.setBackground(new Background(backgroundbis));
+                    //messages.setStyle("text-area-background: blue;");
                     TextField writeMsg = new TextField("");
                     writeMsg.setPromptText("Write a message");
                     writeMsg.setLayoutX(40);
@@ -70,16 +70,17 @@ public class ClientGUI extends Application {
                     sendMsg.setLayoutY(350);
                     ScrollPane scrollerMessages = new ScrollPane();
                     scrollerMessages.setContent(messages);
-                    scrollerMessages.setBackground(new Background(new BackgroundFill(Color.DEEPSKYBLUE, null, null)));
+                    scrollerMessages.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
                     scrollerMessages.setPrefSize(500, 300);
                     scrollerMessages.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+                    scrollerMessages.setStyle("-fx-control-inner-background: rgb(255,255,255);");
                     chat.getChildren().add(scrollerMessages);
                     chat.getChildren().addAll(writeMsg, sendMsg);
-                    chat.setBackground(new Background(backgroundbis));
                     sendMsg.setOnMouseClicked(ev -> {
                         client.send(writeMsg.getText());
                         writeMsg.setText("");
                     });
+                    chat.setStyle("-fx-color-background: rgb(255,255,255);");
                     Scene secondscene = new Scene(chat, 500, 400);
                     Stage newWindow = new Stage();
                     newWindow.setResizable(false);
