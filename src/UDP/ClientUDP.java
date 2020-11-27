@@ -40,23 +40,6 @@ public class ClientUDP {
         Pair<String,String> pairClient = new Pair<String, String>(client.getFname(), client.getLname());
         System.out.println("port:"+serverPort+" ip:"+ipGroup);
         MulticastSocket socket = new MulticastSocket(serverPort);
-        /*
-        FileReader history = new FileReader("history.txt");
-        String hist = "";
-        int a;
-        while( (a = history.read()) != -1){
-            int letterInt = a;
-            char letter = (char) letterInt;
-            if(letter != '\n') {
-                hist += letter;
-            }else{
-                System.out.println(hist);
-                hist = "";
-            }
-        }
-        */
-
-        //DatagramSocket clientSock = new DatagramSocket();
         InetAddress serverAddr = InetAddress.getByName(ipGroup);
         socket.joinGroup(serverAddr);
         Thread send = new Thread(new Runnable() {

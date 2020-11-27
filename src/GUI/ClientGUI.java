@@ -108,10 +108,18 @@ public class ClientGUI extends Application {
 
     }
 
-
+    /**
+     * Ajoute un message dans le textArea messages
+     * @param message message à ajouter.
+     */
     public void addMessage(Pair<Pair<String,String>,String> message){
         messages.appendText(message.getKey().getKey()+" "+message.getKey().getValue()+" : "+message.getValue()+"\n");
     }
+
+    /**
+     * Affiche une alerte dont la cause est passée en paramètre.
+     * @param cause Cause de l'alerte
+     */
     public void displayAlert(String cause) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

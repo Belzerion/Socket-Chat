@@ -28,7 +28,9 @@ public class ServerTCP extends Thread{
         }
 
 
-
+    /**
+     * Thread d'écoute qui crée une nouvelle socket client à chaque nouvelle connexion.
+     */
     public static void createSockClient(){
             Thread socketCreation = new Thread(new Runnable() {
                 @Override
@@ -53,7 +55,12 @@ public class ServerTCP extends Thread{
             });
             socketCreation.start();
         }
-        public static void startServ(int args) {
+
+    /**
+     * Initialisaiton de la socket d'écoute du serveur.
+     * @param args
+     */
+    public static void startServ(int args) {
             try {
                 listenSocket = new ServerSocket(args); //port
                 System.out.println("Server ready...");

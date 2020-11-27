@@ -33,7 +33,11 @@ public class ClientThread
         this.historyFile = historyFile;
     }
 
-
+    /**
+     * Envoie l'historique de la conversation dans le flux de sortie de la socket Client côté serveur.
+     * @param socOut flux de sortie de la socket client côté serveur.
+     * @throws IOException
+     */
     public void history(ObjectOutputStream socOut) throws IOException {
         FileReader reader = new FileReader(historyFile);
         int a;

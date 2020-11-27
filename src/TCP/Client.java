@@ -36,6 +36,12 @@ public class Client extends Thread {
         return lname;
     }
 
+    /**
+     * Etablit la connexion avec le serveur HTTP, création de la Socket côté client.
+     * @param hostname adresse IP du serveur
+     * @param port
+     * @return
+     */
     public boolean establishConnection(String hostname, String port) {
         try {
             clientSocket = new Socket(hostname, Integer.parseInt(port));
@@ -57,17 +63,26 @@ public class Client extends Thread {
             return false;
         }
     }
-        public void send(String message){
-            Pair<Pair<String,String>, String> msg;
-            Pair<String, String> clientPair = new Pair<String, String>(fname, lname);
-            try {
-                msg = new Pair<Pair<String,String>, String>(clientPair, message);
-                socOut.writeObject(msg);
-                socOut.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+    /**
+     * Envoie un message dans le flux de sortie de la socket client.
+     * @param message message à envoyer.
+     */
+    public void send(String message){
+        Pair<Pair<String,String>, String> msg;
+        Pair<String, String> clientPair = new Pair<String, String>(fname, lname);
+        try {
+            msg = new Pair<Pair<String,String>, String>(clientPair, message);
+            socOut.writeObject(msg);
+            socOut.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * Thread de Lecture du flux d'entrée de la socket client.
+     */
     public void receive(){
         Pair<Pair<String,String>, String> msg;
         try {
